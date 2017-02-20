@@ -74,10 +74,21 @@ public class HomePage_Module {
 		catch(Exception e)
 		{throw(e);}
 	}
+
+
 	public static void access_NSCMenu() throws Exception{
 		try{
 			WebElement nscMenu = Main_Page.menu_NSC();
 			ActionKeywords.clickAction(nscMenu);
+		}
+		catch(Exception e)
+		{throw(e);}
+	}
+
+	public static void access_UNSPSCMenu() throws Exception{
+		try{
+			WebElement UNSPSCMenu = Main_Page.menu_UNSPSC();
+			ActionKeywords.clickAction(UNSPSCMenu);
 		}
 		catch(Exception e)
 		{throw(e);}

@@ -1,7 +1,5 @@
 package mcat.modules;
 
-import cucumber.api.java.gl.E;
-import mcat.pageObjects.IncMenu_Page;
 import mcat.pageObjects.NscMenu_Page;
 import mcat.pageObjects.RawDataItem_Page;
 import mcat.pageObjects.SearchCriteria;

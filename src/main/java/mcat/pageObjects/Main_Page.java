@@ -62,11 +62,25 @@ public class Main_Page extends BaseClass{
 		catch(Exception e){throw(e);}
 		return element;
 	}
+
 	public static WebElement menu_INC() throws Exception
 	{
 		try
 		{
 			element = ActionKeywords.findElementByXpath("//a[contains(.,'INC')]");
+		}
+		catch (Exception e)
+		{
+			throw (e);
+		}
+		return element;
+	}
+
+	public static WebElement menu_UNSPSC() throws Exception
+	{
+		try
+		{
+			element = ActionKeywords.findElementByXpath("//a[contains(.,'UNSPSC')]");
 		}
 		catch (Exception e)
 		{
