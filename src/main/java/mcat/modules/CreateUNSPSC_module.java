@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 public class CreateUNSPSC_module {
 
     public static String searchCriteria;
+
     public static void Create_UNSPSC() throws Exception
     {
         ActionKeywords.clickAction(UNSPSC_Page.CreateUNSPSC_Link());

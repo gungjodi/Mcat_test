@@ -94,6 +94,15 @@ public class HomePage_Module {
 		{throw(e);}
 	}
 
+	public static void access_AttributeGroupMenu() throws Exception{
+		try{
+			WebElement UNSPSCMenu = Main_Page.menu_AttributeGroup();
+			ActionKeywords.clickAction(UNSPSCMenu);
+		}
+		catch(Exception e)
+		{throw(e);}
+	}
+
 	public static void access_INCMenu() throws Exception{
 		try{
 			WebElement nscMenu = Main_Page.menu_INC();

@@ -88,6 +88,21 @@ public class Main_Page extends BaseClass{
 		}
 		return element;
 	}
+
+	public static WebElement menu_AttributeGroup() throws Exception
+	{
+		try
+		{
+			element = ActionKeywords.findElementByXpath("//a[contains(.,'Attribute Group')]");
+		}
+		catch (Exception e)
+		{
+			throw (e);
+		}
+		return element;
+	}
+
+
 	public static WebElement menu_BuildOutput() throws Exception{
 		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Build Output')]");}
 		catch(Exception e){throw(e);}

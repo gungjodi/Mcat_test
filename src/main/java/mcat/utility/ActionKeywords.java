@@ -64,7 +64,13 @@ public class ActionKeywords extends BaseClass {
 		 WebDriverWait wait = new WebDriverWait(driver, 10);
 	     wait.until(ExpectedConditions.visibilityOfElementLocated((By) by));
 	}
-	
+
+	public static void waitForElementDisappear(By by){
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.ignoring(StaleElementReferenceException.class)
+			.ignoring(NoSuchElementException.class)
+			.until(ExpectedConditions.invisibilityOfElementLocated((By) by));
+	}
 	public static void implicitWait(){
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

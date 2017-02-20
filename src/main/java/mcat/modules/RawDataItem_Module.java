@@ -61,7 +61,7 @@ public class RawDataItem_Module {
             if(column.get(5).getText().equals("NEW"))
             {
                 WebElement stockCodeLink = RawDataItem_Page.StockCodeLink("//*[@id='"+resultRow+"']/td[2]/a");
-                ActionKeywords.clickAction(stockCodeLink);
+                ActionKeywords.moveToElementExecutor(stockCodeLink);
                 break;
             }
         }

@@ -41,9 +41,6 @@ public class CreateINC_module {
 
         WebElement addCriteria = SearchCriteria.btn_AddCriteria();
         ActionKeywords.clickAction(addCriteria);
-        System.out.println("criteria0 : "+ExcelUtils.getCellData(1, 11));
-        System.out.println("operator0 : "+ExcelUtils.getCellData(7, 12));
-        System.out.println("key : "+ExcelUtils.getCellData(12, 6));
         SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(1, 11));
         ActionKeywords.pageWait();
         SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(7, 12));
