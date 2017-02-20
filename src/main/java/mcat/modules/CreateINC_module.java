@@ -26,7 +26,6 @@ public class CreateINC_module {
         inc_code = ExcelUtils.getCellData(10, 6);
         String inc_name = ExcelUtils.getCellData(10, 7);
         String inc_desc = ExcelUtils.getCellData(10, 8);
-        System.out.println("INC CODE : "+inc_code);
         IncMenu_Page.IncCode_Field().sendKeys(inc_code);
         IncMenu_Page.IncName_Field().sendKeys(inc_name);
         IncMenu_Page.IncDesc_Field().sendKeys(inc_desc);

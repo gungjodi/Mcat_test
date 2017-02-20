@@ -42,7 +42,6 @@ public class RawDataItem_Page extends BaseClass {
 
 	public static List<WebElement> RawDataRows() throws Exception{
 		try{
-            Thread.sleep(5000);
 			elements = ActionKeywords.findElementsByXpath("//*[@id='ResultTable']/tbody/tr");
 		}
 

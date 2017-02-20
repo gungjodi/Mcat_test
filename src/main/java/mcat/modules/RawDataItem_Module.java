@@ -53,7 +53,7 @@ public class RawDataItem_Module {
 
 	public static void newRawItem() throws Exception
     {
-
+        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
         List<WebElement> rows = RawDataItem_Page.RawDataRows();
         for (int i = 0 ; i<rows.size();i++) {
             String resultRow = "ResultRow"+i;
