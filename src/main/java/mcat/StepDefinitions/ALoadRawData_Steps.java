@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by Agung_P1706 on 09/02/2017.
  */
-public class LoadRawData_Steps {
+public class ALoadRawData_Steps {
     private WebDriver driver;
 
     public WebDriver getDriver() {

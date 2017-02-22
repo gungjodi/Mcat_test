@@ -8,45 +8,49 @@ public class Main_Page extends BaseClass{
 
 	public Main_Page(WebDriver driver) {
 		super(driver);
-		
 	}
 
 	public static WebElement menu_McatMainMenu() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'MCat Menu')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("MCat Menu");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	
 	public static WebElement menu_DataPreparation() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Data Preparation')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Data Preparation");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	public static WebElement menu_CatalogueItem() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Catalogue Item')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Catalogue Item");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	public static WebElement menu_ManageItem() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Manage Item')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Manage Item");}
+		catch(Exception e){throw(e);}
+		return element;
+	}
+	public static WebElement menu_ManageItem_Configuration() throws Exception{
+		try{element = ActionKeywords.findElementByPartialLinkText("Configuration");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	//For access Security Configuration Menu
 	public static WebElement menu_SecurityConfig() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Security Configuration')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Security Configuration");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	//For access Load Raw Data Menu
 	public static WebElement menu_LoadRawData() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Load Raw Data')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Load Raw Data");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
 	//For access Load Dictionary Menu
 	public static WebElement menu_LoadDictionaryData() throws Exception{
-		try{element = ActionKeywords.findElementByXpath("//a[contains(.,'Load Dictionary Data')]");}
+		try{element = ActionKeywords.findElementByPartialLinkText("Load Dictionary Data");}
 		catch(Exception e){throw(e);}
 		return element;
 	}

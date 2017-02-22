@@ -12,8 +12,8 @@ public class HooksTest {
 	@Before
 	public void buildDriver()throws Throwable{
 
-		driver = ActionKeywords.OpenBrowser("Firefox");
-//		driver = ActionKeywords.OpenBrowser("Chrome");
+//		driver = ActionKeywords.OpenBrowser("Firefox");
+		driver = ActionKeywords.OpenBrowser("Chrome");
         driver.manage().window().maximize();
 	}
 	@After

@@ -10,7 +10,7 @@ import mcat.utility.ActionKeywords;
 /**
  * Created by Agung_P1706 on 10/02/2017.
  */
-public class LoadDictionaryData_Steps {
+public class BLoadDictionaryData_Steps {
     @When("^User access Load Dictionary Data menu$")
     public void userAccessLoadDictionaryDataMenu() throws Throwable {
         HomePage_Module.access_MCatMenu();

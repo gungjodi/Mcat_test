@@ -8,7 +8,6 @@ public class HomePage_Module {
 	
 	public static void access_MCatMenu() throws Exception{
 		try{
-			//Hover MCat Menu
 			WebElement menuHover= Main_Page.menu_McatMainMenu();
 		    ActionKeywords.hoverAction(menuHover);
 		}
@@ -42,6 +41,16 @@ public class HomePage_Module {
 		catch(Exception e)
 		{throw(e);}
 	}
+
+	public static void access_ManageItemMenuConfiguration() throws Exception{
+		try{
+			WebElement manageItemMenu = Main_Page.menu_ManageItem_Configuration();
+			ActionKeywords.clickAction(manageItemMenu);
+		}
+		catch(Exception e)
+		{throw(e);}
+	}
+
 	public static void access_LoadRawDataMenu() throws Exception{
 		try{
 			WebElement loadRawDataMenu = Main_Page.menu_LoadRawData();

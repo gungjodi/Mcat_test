@@ -73,7 +73,6 @@ public class CreateAttribute_Module {
         WebElement btnSearch = SearchCriteria.btn_Search();
         ActionKeywords.clickAction(btnSearch);
     }
-
     public static void searchResult() throws Exception
     {
         ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
