@@ -43,13 +43,4 @@ public class AttributeGroup_Page extends BaseClass{
         return element;
     }
 
-    public static WebElement addBtn() throws Exception
-    {
-        try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/p/input");
-        } catch (Exception e) {
-            throw e;
-        }
-        return element;
-    }
 }

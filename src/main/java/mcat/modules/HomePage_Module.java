@@ -1,6 +1,7 @@
 package mcat.modules;
 
 import mcat.utility.ActionKeywords;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import mcat.pageObjects.Main_Page;
 
@@ -8,8 +9,7 @@ public class HomePage_Module {
 	
 	public static void access_MCatMenu() throws Exception{
 		try{
-			WebElement menuHover= Main_Page.menu_McatMainMenu();
-		    ActionKeywords.hoverAction(menuHover);
+		    ActionKeywords.hoverAction(Main_Page.menu_McatMainMenu());
 		}
 		catch(Exception e)
 		{
@@ -18,25 +18,21 @@ public class HomePage_Module {
 	}
 	public static void access_DataPreparationMenu() throws Exception{
 		try{
-			//access_MCatMenu();
-			WebElement dataPreparationMenu = Main_Page.menu_DataPreparation();
-			ActionKeywords.clickAction(dataPreparationMenu);
+			ActionKeywords.clickAction(Main_Page.menu_DataPreparation());
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
 	public static void access_CatalogueItemMenu() throws Exception{
 		try{
-			WebElement catalogueItemMenu = Main_Page.menu_CatalogueItem();
-			ActionKeywords.clickAction(catalogueItemMenu);
+			ActionKeywords.clickAction(Main_Page.menu_CatalogueItem());
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
 	public static void access_ManageItemMenu() throws Exception{
 		try{
-			WebElement manageItemMenu = Main_Page.menu_ManageItem();
-			ActionKeywords.clickAction(manageItemMenu);
+			ActionKeywords.clickAction(Main_Page.menu_ManageItem());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -44,8 +40,7 @@ public class HomePage_Module {
 
 	public static void access_ManageItemMenuConfiguration() throws Exception{
 		try{
-			WebElement manageItemMenu = Main_Page.menu_ManageItem_Configuration();
-			ActionKeywords.clickAction(manageItemMenu);
+			ActionKeywords.clickAction(Main_Page.menu_ManageItem_Configuration());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -53,32 +48,28 @@ public class HomePage_Module {
 
 	public static void access_LoadRawDataMenu() throws Exception{
 		try{
-			WebElement loadRawDataMenu = Main_Page.menu_LoadRawData();
-			ActionKeywords.clickAction(loadRawDataMenu);
+			ActionKeywords.clickAction(Main_Page.menu_LoadRawData());
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
 	public static void access_RawDataItem() throws Exception{
 		try{
-			WebElement rawDataItemMenu = Main_Page.menu_RawDataItem();
-			ActionKeywords.clickAction(rawDataItemMenu);
+			ActionKeywords.clickAction(Main_Page.menu_RawDataItem());
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
 	public static void access_LoadDictionaryDataMenu() throws Exception{
 		try{
-			WebElement loadDictionaryDataMenu = Main_Page.menu_LoadDictionaryData();
-			ActionKeywords.clickAction(loadDictionaryDataMenu);
+			ActionKeywords.clickAction(Main_Page.menu_LoadDictionaryData());
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
 	public static void access_AttributeMenu() throws Exception{
 		try{
-			WebElement attributeMenu = Main_Page.menu_Attribute();
-			ActionKeywords.clickAction(attributeMenu);
+			ActionKeywords.clickAction(Main_Page.menu_Attribute());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -87,8 +78,7 @@ public class HomePage_Module {
 
 	public static void access_NSCMenu() throws Exception{
 		try{
-			WebElement nscMenu = Main_Page.menu_NSC();
-			ActionKeywords.clickAction(nscMenu);
+			ActionKeywords.clickAction(Main_Page.menu_NSC());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -96,8 +86,7 @@ public class HomePage_Module {
 
 	public static void access_UNSPSCMenu() throws Exception{
 		try{
-			WebElement UNSPSCMenu = Main_Page.menu_UNSPSC();
-			ActionKeywords.clickAction(UNSPSCMenu);
+			ActionKeywords.clickAction(Main_Page.menu_UNSPSC());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -105,8 +94,7 @@ public class HomePage_Module {
 
 	public static void access_AttributeGroupMenu() throws Exception{
 		try{
-			WebElement UNSPSCMenu = Main_Page.menu_AttributeGroup();
-			ActionKeywords.clickAction(UNSPSCMenu);
+			ActionKeywords.clickAction(Main_Page.menu_AttributeGroup());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -114,8 +102,7 @@ public class HomePage_Module {
 
 	public static void access_INCMenu() throws Exception{
 		try{
-			WebElement nscMenu = Main_Page.menu_INC();
-			ActionKeywords.clickAction(nscMenu);
+			ActionKeywords.clickAction(Main_Page.menu_INC());
 		}
 		catch(Exception e)
 		{throw(e);}
@@ -123,8 +110,18 @@ public class HomePage_Module {
 
 	public static void logout() throws Exception{
 		try {
-			WebElement logout = Main_Page.btn_Logout();
-			ActionKeywords.clickAction(logout);
+			ActionKeywords.clickAction(Main_Page.btn_Logout());
+		}
+		catch (Exception e)
+		{
+			throw (e);
+		}
+	}
+
+	public static void waitLoading() throws Exception
+	{
+		try {
+			ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
 		}
 		catch (Exception e)
 		{

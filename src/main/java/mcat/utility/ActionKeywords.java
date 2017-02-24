@@ -71,6 +71,7 @@ public class ActionKeywords extends BaseClass {
 			.ignoring(NoSuchElementException.class)
 			.until(ExpectedConditions.invisibilityOfElementLocated((By) by));
 	}
+
 	public static void implicitWait(){
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}

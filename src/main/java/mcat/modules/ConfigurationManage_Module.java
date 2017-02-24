@@ -30,12 +30,11 @@ public class ConfigurationManage_Module {
         SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(7, 12));
         String searchCriteria=ExcelUtils.getCellData(31, 11);
         RawDataItem_Page.txt_Criteria().sendKeys(searchCriteria);
-        WebElement btnSearch = SearchCriteria.btn_Search();
-        ActionKeywords.clickAction(btnSearch);
+        ActionKeywords.clickAction(SearchCriteria.btn_Search());
         ActionKeywords.pageWait();
     }
 
-    public static void clickConfNameLink() throws Exception
+    public static void click_ConfNameLink() throws Exception
     {
         ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='ResultTable']/tbody/tr/td/img"));
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.rowSearchCriteria());

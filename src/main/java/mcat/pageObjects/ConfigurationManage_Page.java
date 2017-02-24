@@ -42,7 +42,7 @@ public class ConfigurationManage_Page extends BaseClass{
     public static WebElement addAnAttrGoup_btn() throws Exception
     {
         try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/div[9]/table/tbody/tr/td[2]/input");
+            element = ActionKeywords.findElementByXpath("//input[@value='Add an Attribute Group']");
         }
         catch (Exception e)
         {

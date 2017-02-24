@@ -63,19 +63,7 @@ public class IncMenu_Page extends BaseClass{
     public static WebElement searchNscCode_link() throws Exception
     {
         try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/div/table/tbody/tr[4]/td[2]/a");
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        return element;
-    }
-
-    public static WebElement Add_Btn() throws Exception
-    {
-        try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/p/input");
+            element = ActionKeywords.findElementByXpath("//a[contains(@href,'/Inc/NscLookup')]");
         }
         catch (Exception e)
         {

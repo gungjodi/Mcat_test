@@ -1,4 +1,4 @@
-package mcat.StepDefinitions;
+package mcat.cucumberTest;
 
 /**
  * Created by Agung_P1706 on 09/02/2017.
@@ -10,7 +10,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/java/mcat/features",
+        features = "src/main/java/mcat/features/",
         glue = "mcat.StepDefinitions",
         plugin = {
                 "pretty",
@@ -18,5 +18,15 @@ import cucumber.api.junit.Cucumber;
         }
 
 )
+//@CucumberOptions(
+//        strict = false,
+//        features = "src/main/java/mcat/features/",
+//        glue = "mcat.StepDefinitions",
+//        format = {
+//                "pretty",
+//                "json:target/cucumber.json"
+//        },
+//        tags = { "~@ignore" }
+//)
 public class RunCukeTest {
 }

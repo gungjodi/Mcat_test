@@ -55,17 +55,7 @@ public class Attribute_Page extends BaseClass{
     public static WebElement searchGroupBtn() throws Exception
     {
         try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/div/table/tbody/tr[2]/td[2]/a");
-        } catch (Exception e) {
-            throw e;
-        }
-        return element;
-    }
-
-    public static WebElement addBtn() throws Exception
-    {
-        try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/p/input");
+            element = ActionKeywords.findElementByXpath("//a[contains(@href,'AttributeGroup/Search')]");
         } catch (Exception e) {
             throw e;
         }

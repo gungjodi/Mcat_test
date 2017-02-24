@@ -42,7 +42,7 @@ public class NscMenu_Page extends BaseClass{
     public static WebElement searchIncCode_link() throws Exception
     {
         try {
-            element = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/div/table/tbody/tr[1]/td[2]/a");
+            element = ActionKeywords.findElementByXpath("//a[contains(@href,'/Nsc/IncLookup')]");
         }
         catch (Exception e)
         {
@@ -67,18 +67,6 @@ public class NscMenu_Page extends BaseClass{
     {
         try {
             element=ActionKeywords.findElementById("NscTitle");
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        return element;
-    }
-
-    public static WebElement addNsc_button() throws Exception
-    {
-        try {
-            element=ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/p/input");
         }
         catch (Exception e)
         {
