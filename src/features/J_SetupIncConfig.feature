@@ -1,3 +1,4 @@
+@setup_inc_config
 Feature: Setup INC Configuration
 
   Background: flow untill user on Home Page

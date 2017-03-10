@@ -51,6 +51,10 @@ public class CreateAttributeGroup_Module {
 
     public static void search_Result() throws Exception
     {
-        ActionKeywords.findElementByXpath("//a[contains(.,'"+searchCriteria+"')]").isDisplayed();
+        ActionKeywords.assertTrueContains(searchCriteria,CommonElement.resultTableCell(1,2,"/a").getText());
+    }
+
+    public static void success_CreateAttributeGroup() throws Exception {
+        ActionKeywords.assertTrueContains("Attribute Group has been successfully added",CommonElement.validation_Summary().getText());
     }
 }

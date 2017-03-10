@@ -1,20 +1,16 @@
 package StepDefinitions;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import modules.*;
+import org.openqa.selenium.WebDriver;
 import pageObjects.BaseClass;
-import pageObjects.ConfigurationManage_Page;
-import pageObjects.IncMenu_Page;
-import pageObjects.NscMenu_Page;
+import pageObjects.CommonElement;
 import utility.ActionKeywords;
 import utility.Constant;
-import org.openqa.selenium.WebDriver;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Created by Agung_P1706 on 09/02/2017.
@@ -56,7 +52,7 @@ public class Test_Steps {
     }
 
     ////////////////////////////////////
-    /////      LOAD RAW DATA       ////
+    /////      1. LOAD RAW DATA       ////
     ///////////////////////////////////
     @When("^User access Load Raw Data menu$")
     public void userAccessLoadRawDataMenu() throws Throwable {
@@ -71,8 +67,8 @@ public class Test_Steps {
     }
 
     @And("^Successful Upload message should display$")
-    public void successful_Upload_message_should_display() throws Throwable {
-        ActionKeywords.findElementByXpath("//div[@id='validationSummary' and contains(text(), 'Raw Data.xlsx have been uploaded successfully')]").isDisplayed();
+    public void successful_Upload_message_should_display() throws Exception {
+        LoadRawData_Module.result_Displayed();
     }
 
     @When("^User check loaded raw data$")
@@ -87,18 +83,8 @@ public class Test_Steps {
         RawDataItem_Module.set_SearchRawDataItemCriteria();
     }
 
-    @When("^User click LogOut button$")
-    public void userClickLogOutButton() throws Throwable {
-        HomePage_Module.logout();
-    }
-
-    @Then("^User should be logged out$")
-    public void userShouldBeLoggedOut() throws Throwable {
-        LoginModule.loginPageIsDisplayed();
-    }
-
     //////////////////////////////
-    //      LOAD DICTIONARY     //
+    //     LOAD DICTIONARY     //
     /////////////////////////////
     @When("^User access Load Dictionary Data menu$")
     public void userAccessLoadDictionaryDataMenu() throws Throwable {
@@ -114,11 +100,110 @@ public class Test_Steps {
 
     @Then("^Successful Upload Dictionary message should display$")
     public void successful_Upload_Dictionary_message_should_display() throws Throwable {
-        ActionKeywords.findElementByXpath("//div[@id='validationSummary' and contains(text(), 'Dictionary data.xlsx have been uploaded successfully')]").isDisplayed();
+        LoadDictionaryData_Module.result();
+    }
+
+    @Then("^Attribute Data is displayed$")
+    public void attribute_Data_is_displayed() throws Throwable {
+        Attribute_Module.set_SearchAttributeItemCriteria();
+    }
+
+    @When("^User click the Attribute Code$")
+    public void user_click_the_Attribute_Code() throws Throwable {
+        Attribute_Module.click_AttributeCode();
+    }
+
+    @When("^Save the update attribute detail$")
+    public void save_the_update_attribute_detail() throws Throwable {
+        Attribute_Module.update_AttributeDetail();
+    }
+
+    @Then("^Attribute Detail has been successfully updated$")
+    public void attribute_Detail_has_been_successfully_updated() throws Throwable {
+        ActionKeywords.assertTrueContains("Attribute Name already exists in database.",ActionKeywords.findElementById("validationSummary").getText());
+    }
+
+    @When("^User access Search NSC menu$")
+    public void user_access_Search_NSC_menu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_ManageItemMenu();
+        HomePage_Module.access_NSCMenu();
+        NSC_Module.access_SearchNSCMenu();
+    }
+
+    @Then("^NSC Data is displayed$")
+    public void nsc_Data_is_displayed() throws Throwable {
+        NSC_Module.set_SearchNSCCriteria();
+    }
+
+    @When("^User click the NSC Code$")
+    public void user_click_the_NSC_Code() throws Throwable {
+        NSC_Module.click_NSCCode();
+    }
+
+    @When("^Save the update NSC detail$")
+    public void save_the_update_NSC_detail() throws Throwable {
+        NSC_Module.update_NSCDetail();
+    }
+
+    @Then("^NSC Detail has been successfully updated$")
+    public void nsc_Detail_has_been_successfully_updated() throws Throwable {
+        ActionKeywords.assertTrueContains("NSC has been successfully updated",ActionKeywords.findElementById("validationSummary").getText());
+    }
+
+    @When("^User acess Search INC menu$")
+    public void user_acess_Search_INC_menu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_ManageItemMenu();
+        HomePage_Module.access_INCMenu();
+        INC_Module.access_SearchINCMenu();
+    }
+
+    @Then("^INC Data is displayed$")
+    public void inc_Data_is_displayed() throws Throwable {
+        INC_Module.set_SearchINCCriteria();
+    }
+
+    @When("^User click the INC Code$")
+    public void user_click_the_INC_Code() throws Throwable {
+        INC_Module.click_INCCode();
+    }
+
+    @And("^Save the update INC detail$")
+    public void save_the_update_INC_detail() throws Throwable {
+        INC_Module.update_INCDetail();
+    }
+
+    @Then("^INC Detail has been successfully updated$")
+    public void incDetailHasBeenSuccessfullyUpdated() throws Throwable {
+        ActionKeywords.assertTrueContains("INC has been successfully updated",ActionKeywords.findElementById("validationSummary").getText());
+    }
+
+    @When("^User access Search Configuration Menu$")
+    public void userAccessSearchConfigurationMenu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_ManageItemMenu();
+        HomePage_Module.access_ManageItemMenuConfiguration();
+        ConfigurationManage_Module.access_SearchConfigurationMenu();
+    }
+
+    @Then("^Configuration Data is Displayed$")
+    public void configurationDataIsDisplayed() throws Throwable {
+        INC_Module.set_SearchINCCriteria();
+    }
+
+    @When("^User click Configuration Item$")
+    public void userClickConfigurationItem() throws Throwable {
+        ConfigurationManage_Module.click_ConfNameLink();
+    }
+
+    @Then("^INC Code is Displayed on Item Description Detail$")
+    public void incCodeIsDisplayedOnItemDescriptionDetail() throws Throwable {
+        ConfigurationManage_Module.verify_IncCode();
     }
 
     //////////////////////////////////////
-    //          NAME THE ITEM          //
+    //          2. NAME THE ITEM          //
     /////////////////////////////////////
     @When("^User access Search Raw Data Item menu$")
     public void userAccessSearchRawDataItemMenu() throws Throwable {
@@ -135,7 +220,16 @@ public class Test_Steps {
     @And("^User click StockCode with New$")
     public void userClickStockCodeWithNew() throws Throwable {
         RawDataItem_Module.newRawItem();
+    }
+
+    @When("^User Name the Item$")
+    public void userNameTheItem() throws Throwable {
         RawDataItem_Module.nameItem();
+    }
+
+    @Then("^Item should be named$")
+    public void itemShouldBeNamed() throws Throwable {
+        RawDataItem_Module.checkItemNamed();
     }
 
     ////////////////////////////////////////////////
@@ -151,12 +245,17 @@ public class Test_Steps {
         RawDataItem_Module.pickIncCode();
     }
 
-    @And("^User Click name button$")
+    @Then("^User Click name button$")
     public void userClickNameButton() throws Throwable {
         RawDataItem_Module.nameItems();
     }
+
+    @And("^Items should be named$")
+    public void itemsShouldBeNamed() throws Throwable {
+        RawDataItem_Module.checkItemFromChecklistNamed();
+    }
     //////////////////////////////////////////
-    //          CREATE NEW INC              //
+    //          3. CREATE NEW INC              //
     //////////////////////////////////////////
     @When("^User access INC menu$")
     public void userAccessINCMenu() throws Throwable {
@@ -182,7 +281,7 @@ public class Test_Steps {
 
     @Then("^INC should be created$")
     public void incShouldCreated() throws Throwable {
-        IncMenu_Page.resultSuccess().isDisplayed();
+        CreateINC_module.success_CreateInc();
     }
 
     @When("^user click search inc menu$")
@@ -201,7 +300,7 @@ public class Test_Steps {
     }
 
     ////////////////////////////////////
-    ///     CREATE NEW NSC          ///
+    ///     4. CREATE NEW NSC          ///
     ///////////////////////////////////
     @When("^User access create NSC menu$")
     public void userAccessCreateNSCMenu() throws Throwable {
@@ -233,7 +332,7 @@ public class Test_Steps {
 
     @And("^NSC should be added$")
     public void nscShouldBeAdded() throws Throwable {
-        NscMenu_Page.resultSuccess().isDisplayed();
+        CreateNSC_module.success_CreateNsc();
     }
 
     @When("^User access search NSC menu$")
@@ -252,7 +351,7 @@ public class Test_Steps {
     }
 
     //////////////////////////////////////
-    //        CREATE NEW UNSPSC        //
+    //        5. CREATE NEW UNSPSC        //
     /////////////////////////////////////
     @When("^User access create UNSPSC Menu$")
     public void userAccessCreateUNSPSCMenu() throws Throwable {
@@ -267,9 +366,14 @@ public class Test_Steps {
         CreateUNSPSC_module.fill_UNSPSCDetail();
     }
 
-    @And("^click add UNSPSC button$")
+    @Then("^click add UNSPSC button$")
     public void clickAddUNSPSCButton() throws Throwable {
         CreateUNSPSC_module.add_UNSPSC();
+    }
+
+    @And("^UNSPSC should be created$")
+    public void unspscShouldBeCreated() throws Throwable {
+        CreateUNSPSC_module.success_CreateUnspsc();
     }
 
     @When("^User access Search UNSPSC menu$")
@@ -288,7 +392,7 @@ public class Test_Steps {
     }
 
     ///////////////////////////////////////////
-    ///       CREATE ATTRIBUTE GROUP        ///
+    ///       6. CREATE ATTRIBUTE GROUP        ///
     //////////////////////////////////////////
     @When("^User access create Attribute Group Menu$")
     public void userAccessCreateAttributeGroupMenu() throws Throwable {
@@ -303,9 +407,14 @@ public class Test_Steps {
         CreateAttributeGroup_Module.fill_AttributeGroupDetail();
     }
 
-    @And("^click add Attribute Group button$")
+    @Then("^click add Attribute Group button$")
     public void clickAddAttributeGroupButton() throws Throwable {
         CreateAttributeGroup_Module.add_AttributeGroup();
+    }
+
+    @And("^Attribute Group item should be created$")
+    public void attributeGroupItemShouldBeCreated() throws Throwable {
+        CreateAttributeGroup_Module.success_CreateAttributeGroup();
     }
 
     @When("^User access Search Attribute Group menu$")
@@ -324,7 +433,7 @@ public class Test_Steps {
     }
 
     //////////////////////////////////////
-    //          CREATE ATTRIBUTE        //
+    //          7. CREATE ATTRIBUTE        //
     /////////////////////////////////////
     @When("^User access create Attribute Menu$")
     public void userAccessCreateAttributeMenu() throws Throwable {
@@ -339,13 +448,21 @@ public class Test_Steps {
         CreateAttribute_Module.fill_AttributeDetail();
     }
 
-    @And("^click add Attribute button$")
+    @Then("^click add Attribute button$")
     public void clickAddAttributeButton() throws Throwable {
         CreateAttribute_Module.add_AttributeGroup();
     }
 
+    @And("^Attribute item should be created$")
+    public void attributeItemShouldBeCreated() throws Throwable {
+        CreateAttribute_Module.success_CreateAttribute();
+    }
+
     @When("^User access Search Attribute menu$")
     public void userAccessSearchAttributeMenu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_ManageItemMenu();
+        HomePage_Module.access_AttributeMenu();
         CreateAttribute_Module.search_Attribute();
     }
 
@@ -360,7 +477,7 @@ public class Test_Steps {
     }
 
     ///////////////////////////////////////////////
-    //          SETUP INC CONFIGURATION         //
+    //          8. SETUP INC CONFIGURATION         //
     //////////////////////////////////////////////
     @Given("^user is at Search Configuration Menu$")
     public void userIsAtSearchConfigurationMenu() throws Throwable {
@@ -410,11 +527,11 @@ public class Test_Steps {
 
     @And("^Configuration should be saved successfully$")
     public void configurationShouldBeSavedSuccessfully() throws Throwable {
-        ConfigurationManage_Page.result().isDisplayed();
+        ConfigurationManage_Module.success_SaveConfiguration();
     }
 
     //////////////////////////////////////////////
-    //               ASSIGN ITEM               //
+    //              9. ASSIGN ITEM               //
     ////////////////////////////////////////////
     @Given("^User is at Search Raw Data Menu$")
     public void userIsAtSearchRawDataMenu() throws Throwable {
@@ -449,5 +566,202 @@ public class Test_Steps {
     @And("^Assigned items are displayed on table$")
     public void assignedItemsAreDisplayedOnTable() throws Throwable {
         RawDataItem_Module.resultItemsAssignedTo();
+    }
+
+    /////////////////////////////////////////
+    ////    10. Submit Assigned Item    ////
+    ///////////////////////////////////////
+    @When("^User access Search Assigned Item Menu$")
+    public void userAccessSearchAssignedItemMenu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_CatalogueItemMenu();
+        HomePage_Module.access_AssignedItemMenu();
+    }
+
+    @Then("^User search the assigned item$")
+    public void userSearchTheAssignedItem() throws Throwable {
+        AssignedItem_Module.search_AssignedItem();
+    }
+
+    @And("^User submit the assigned item$")
+    public void userSubmitTheAssignedItem() throws Throwable {
+        AssignedItem_Module.click_AssignedItem();
+        AssignedItem_Module.submit_AssignedItem();
+    }
+
+    @Then("^User search the submitted item$")
+    public void userSearchTheSubmittedItem() throws Throwable {
+        AssignedItem_Module.search_SubmittedItem();
+    }
+
+    @And("^submitted item should be displayed$")
+    public void submittedItemShouldBeDisplayed() throws Throwable {
+        AssignedItem_Module.displayed_submittedItem();
+    }
+
+    ////////////////////////////////////////////////////////
+    ////    10. Submit Assigned Item From Checklist    ////
+    //////////////////////////////////////////////////////
+    @Then("^User search the assigned items from checklist$")
+    public void userSearchTheAssignedItemsFromChecklist() throws Throwable {
+        AssignedItem_Module.search_AssignedItem();
+    }
+
+    @And("^User submit the checked items$")
+    public void userSubmitTheCheckedItems() throws Throwable {
+        AssignedItem_Module.tick_AssignedItems();
+    }
+
+    @Then("^User search the submitted items$")
+    public void userSearchTheSubmittedItems() throws Throwable {
+        for (int i = 0; i < 4; i++) {
+            AssignedItem_Module.submit_AssignedItem();
+            if(i<3)
+            {
+                ActionKeywords.assertTrueContains("Raw Data has been successfully updated",CommonElement.validation_Summary().getText());
+            }
+        }
+    }
+
+    @And("^submitted items should be displayed$")
+    public void submittedItemsShouldBeDisplayed() throws Throwable {
+        AssignedItem_Module.search_SubmittedItems();
+    }
+
+    //////////////////////////////////////////////
+    /////       11. REVIEW ITEM       ///////////
+    ////////////////////////////////////////////
+    @When("^User access Search Review Item Menu$")
+    public void userAccessSearchReviewItemMenu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_CatalogueItemMenu();
+        HomePage_Module.access_ReviewItemMenu();
+    }
+
+    @Then("^User search the catalogued item$")
+    public void userSearchTheCataloguedItem() throws Throwable {
+        ReviewItem_Module.search_CataloguedItem();
+    }
+
+    @And("^User approve the catalogued item$")
+    public void userApproveTheCataloguedItem() throws Throwable {
+        ReviewItem_Module.click_CataloguedItem();
+        ReviewItem_Module.approve_CataloguedItem();
+    }
+
+    @Then("^User search the reviewed item$")
+    public void userSearchTheReviewedItem() throws Throwable {
+        ReviewItem_Module.search_ReviewedItem();
+    }
+
+    @And("^reviewed item should be displayed$")
+    public void reviewedItemShouldBeDisplayed() throws Throwable {
+        ReviewItem_Module.displayed_approvedItem();
+    }
+
+    ///////////////////////////////////////////////////////
+    /////       11. REVIEW ITEM FROM CHECKLIST    ////////
+    /////////////////////////////////////////////////////
+    @Then("^User search the catalogued items from checklist$")
+    public void userSearchTheCataloguedItemsFromChecklist() throws Throwable {
+        ReviewItem_Module.search_CataloguedItem();
+    }
+
+    @And("^User approve the checked items$")
+    public void userApproveTheCheckedItems() throws Throwable {
+        ReviewItem_Module.tick_CataloguedItems();
+    }
+
+    @Then("^User search the approved items$")
+    public void userSearchTheApprovedItems() throws Throwable {
+        for (int i = 0; i < 4; i++) {
+            ReviewItem_Module.approve_CataloguedItem();
+            if(i<3)
+            {
+                ActionKeywords.assertTrueContains("Raw Data has been successfully updated",CommonElement.validation_Summary().getText());
+            }
+        }
+    }
+
+    @And("^approved items should be displayed$")
+    public void approvedItemsShouldBeDisplayed() throws Throwable {
+        ReviewItem_Module.search_ApprovedItems();
+    }
+
+    ///////////////////////////////////
+    ////     Advance Search      /////
+    /////////////////////////////////
+
+    @When("^User access Advance Search Menu$")
+    public void userAccessAdvanceSearchMenu() throws Throwable {
+        HomePage_Module.access_MCatMenu();
+        HomePage_Module.access_CatalogueItemMenu();
+        HomePage_Module.access_AdvanceSearchMenu();
+    }
+
+    @Then("^User search item based on INC$")
+    public void userSearchItemBasedOnINC() throws Throwable {
+        AdvanceSearch_Module.search_AdvanceINC();
+    }
+
+    @And("^INC item is displayed$")
+    public void incItemIsDisplayed() throws Throwable {
+        AdvanceSearch_Module.displayed_INCCode();
+    }
+
+    @When("^User search Attribute$")
+    public void userSearchAttribute() throws Throwable {
+        AdvanceSearch_Module.search_AdvanceAttribute();
+    }
+
+    @Then("^Attribute is Displayed$")
+    public void attributeIsDisplayed() throws Throwable {
+        AdvanceSearch_Module.displayed_AdvanceAttribute();
+    }
+
+
+    @Then("^User search item criteria$")
+    public void userSearchItemCriteria() throws Throwable {
+        AdvanceSearch_Module.search_ItemCriteria();
+    }
+
+    @And("^User edit to Assigned Item$")
+    public void userEditToAssignedItem() throws Throwable {
+        AdvanceSearch_Module.pick_StockCode();
+        AdvanceSearch_Module.editToAssign_StockCode();
+
+    }
+
+    @When("^User check edited item$")
+    public void userCheckEditedItem() throws Throwable {
+        AdvanceSearch_Module.search_EditToAssign();
+    }
+
+    @Then("^edited item is displayed$")
+    public void editedItemIsDisplayed() throws Throwable {
+        AdvanceSearch_Module.displayed_EditToAssign();
+    }
+
+    @Then("^User search QA item criteria$")
+    public void userSearchQAItemCriteria() throws Throwable {
+        AdvanceSearch_Module.search_ItemCriteria();
+        AdvanceSearch_Module.search_QAItemCriteria();
+    }
+
+    @And("^User edit to Review Item$")
+    public void userEditToReviewItem() throws Throwable {
+        AdvanceSearch_Module.pick_StockCode();
+        AdvanceSearch_Module.editToReview_StockCode();
+    }
+
+    @When("^User check Reviewed item$")
+    public void userCheckReviewedItem() throws Throwable {
+        HomePage_Module.access_AdvanceSearchMenu();
+        AdvanceSearch_Module.search_EditToReview();
+    }
+
+    @Then("^Reviewed item is displayed$")
+    public void reviewedItemIsDisplayed() throws Throwable {
+        AdvanceSearch_Module.displayed_EditToReview();
     }
 }

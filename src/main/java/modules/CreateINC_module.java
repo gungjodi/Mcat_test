@@ -1,5 +1,6 @@
 package modules;
 
+import com.google.common.base.Verify;
 import pageObjects.CommonElement;
 import pageObjects.IncMenu_Page;
 import pageObjects.RawDataItem_Page;
@@ -74,6 +75,11 @@ public class CreateINC_module {
 
     public static void item_Exists() throws Exception
     {
-        Assert.assertTrue("Item exists",ActionKeywords.findElementByPartialLinkText(inc_code).isDisplayed());
+        ActionKeywords.assertTrueContains(inc_code,CommonElement.resultTableCell(1,1,"/a").getText());
+
+    }
+
+    public static void success_CreateInc() throws Exception {
+        ActionKeywords.assertTrueContains("INC has been successfully added",CommonElement.validation_Summary().getText());
     }
 }

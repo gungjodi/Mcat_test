@@ -11,6 +11,7 @@ public class BaseClass {
 	public static WebElement element;
 	public static List<WebElement> elements;
 	public static boolean bResult;
+	public static StringBuffer verificationErrors;
 	public BaseClass(WebDriver driver){
 		BaseClass.driver = driver;
 		BaseClass.bResult = true;

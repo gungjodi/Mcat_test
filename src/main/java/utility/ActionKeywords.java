@@ -1,6 +1,9 @@
 package utility;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -10,9 +13,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.BaseClass;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 public class ActionKeywords extends BaseClass {
 	
@@ -65,8 +68,18 @@ public class ActionKeywords extends BaseClass {
 	     wait.until(ExpectedConditions.visibilityOfElementLocated((By) by));
 	}
 
-	public static void waitForElementDisappear(By by){
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+    public static void waitForElementPresence(By by){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated((By) by));
+    }
+
+	public static void assertTrueContains(String expectedResult,String actualResult) throws Exception {
+		Assert.assertTrue("Expected result is: "+expectedResult+" | Actual result is: "+actualResult,actualResult.contains(expectedResult));
+        System.out.println("Expected result is: "+expectedResult+" | Actual result is: "+actualResult);
+	}
+
+    public static void waitForElementDisappear(By by){
+		WebDriverWait wait = new WebDriverWait(driver, 120);
 		wait.ignoring(StaleElementReferenceException.class)
 			.ignoring(NoSuchElementException.class)
 			.until(ExpectedConditions.invisibilityOfElementLocated((By) by));
@@ -117,12 +130,16 @@ public class ActionKeywords extends BaseClass {
 		catch(Exception e){throw(e);}
 		return handles;
 	}
-	
-	public static WebElement findElementByXpath (String xpathExpression) throws Exception{
+
+	public static WebElement findElementByXpath (String xpathExpression) throws NoSuchElementException{
 		try {element = driver.findElement(By.xpath(xpathExpression));}
-		catch(Exception e){throw(e);}
+		catch(NoSuchElementException e)
+		{
+			throw(e);
+		}
 		return element;
 	}
+
 	public static WebElement findElementById (String id) throws Exception{
 		try {element = driver.findElement(By.id(id));}
 		catch(Exception e){throw(e);}
@@ -147,6 +164,12 @@ public class ActionKeywords extends BaseClass {
 	public static void moveToElementExecutor(WebElement element)throws Exception {
 		  JavascriptExecutor js = (JavascriptExecutor) driver;
 		  js.executeScript("arguments[0].click();", element);
+	}
+
+	public static void scrollToElement(WebElement element) throws Exception
+	{
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		Thread.sleep(500);
 	}
 
 	public static List<WebElement> findElementsById(String idSelector) throws Exception

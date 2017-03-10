@@ -1,3 +1,4 @@
+@create_new_nsc
 Feature: Create new NSC
 
   Background: flow untill user on Home Page

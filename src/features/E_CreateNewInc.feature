@@ -1,3 +1,4 @@
+@create_new_inc
 Feature: Create new INC
 
   Background: flow untill user on Home Page

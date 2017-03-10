@@ -1,3 +1,4 @@
+@create_new_attribute
 Feature: Create new Attribute
 
   Background: flow untill user on Home Page
@@ -9,7 +10,8 @@ Feature: Create new Attribute
   Scenario: Create new Attribute
     When User access create Attribute Menu
     Then User fill Attribute detail
-    And click add Attribute button
+    Then click add Attribute button
+    And Attribute item should be created
     When User access Search Attribute menu
     Then search Attribute criteria
     And Attribute item should be displayed

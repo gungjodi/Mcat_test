@@ -1,5 +1,6 @@
 package modules;
 
+import pageObjects.CommonElement;
 import pageObjects.ConfigurationManage_Page;
 import pageObjects.RawDataItem_Page;
 import pageObjects.SearchCriteria;
@@ -33,7 +34,7 @@ public class ConfigurationManage_Module {
 
     public static void click_ConfNameLink() throws Exception
     {
-        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='ResultTable']/tbody/tr/td/img"));
+        HomePage_Module.waitLoading();
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.rowSearchCriteria());
     }
 
@@ -66,9 +67,11 @@ public class ConfigurationManage_Module {
         {
             ActionKeywords.navigateOnWindow(window);
         }
-        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='ResultTable']/tbody/tr/td/img"));
+        HomePage_Module.waitLoading();
+        String expected = ConfigurationManage_Page.firstAttrName().getText();
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.firstAttrCode());
         ActionKeywords.navigateOnWindow(parentWindow);
+        ActionKeywords.assertTrueContains(expected,ConfigurationManage_Page.lastRecordItem_Field().getAttribute("value"));
     }
 
     public static void add_newBusDetailDesc() throws Exception{
@@ -85,8 +88,10 @@ public class ConfigurationManage_Module {
             ActionKeywords.navigateOnWindow(window);
         }
         ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='ResultTable']/tbody/tr/td/img"));
+        String expected = ConfigurationManage_Page.firstAttrName().getText();
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.firstAttrCode());
         ActionKeywords.navigateOnWindow(parentWindow);
+        ActionKeywords.assertTrueContains(expected,ConfigurationManage_Page.lastBusDetail_Field().getAttribute("value"));
     }
 
     public static void add_newGroupDetailDesc() throws Exception {
@@ -103,11 +108,23 @@ public class ConfigurationManage_Module {
             ActionKeywords.navigateOnWindow(window);
         }
         ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='ResultTable']/tbody/tr/td/img"));
+        String expected = ConfigurationManage_Page.firstAttrName().getText();
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.firstAttrCode());
         ActionKeywords.navigateOnWindow(parentWindow);
+        ActionKeywords.assertTrueContains(expected,ConfigurationManage_Page.lastGroupDetail_Field().getAttribute("value"));
     }
 
     public static void save_Configuration() throws Exception {
         ActionKeywords.moveToElementExecutor(ConfigurationManage_Page.save_Btn());
+    }
+
+    public static void verify_IncCode() throws Exception {
+        String incCode = ExcelUtils.getCellData(19,1);
+        ActionKeywords.assertTrueContains(incCode,ConfigurationManage_Page.incCode_field().getAttribute("value"));
+    }
+
+    public static void success_SaveConfiguration() throws Exception {
+        ActionKeywords.assertTrueContains("Configuration has been successfully updated.", CommonElement.validation_Summary().getText());
+
     }
 }

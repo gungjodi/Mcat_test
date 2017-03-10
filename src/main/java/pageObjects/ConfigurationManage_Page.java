@@ -24,11 +24,37 @@ public class ConfigurationManage_Page extends BaseClass{
         return element;
     }
 
+    public static WebElement incCode_field() throws Exception
+    {
+        try
+        {
+            element = ActionKeywords.findElementById("IncCode");
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return element;
+    }
+
     public static WebElement firstAttrCode() throws Exception
     {
         try
         {
             element = ActionKeywords.findElementByXpath("//*[@id='ResultRow0']/td[1]/a");
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return element;
+    }
+
+    public static WebElement firstAttrName() throws Exception
+    {
+        try
+        {
+            element = ActionKeywords.findElementByXpath("//*[@id='ResultRow0']/td[2]");
         }
         catch (Exception e)
         {
@@ -61,6 +87,12 @@ public class ConfigurationManage_Page extends BaseClass{
         return element;
     }
 
+    public static WebElement link_INCCode() throws Exception{
+        try{element = ActionKeywords.findElementByXpath(".//*[@id='ResultRow0']/td[3]");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
     public static WebElement addLastRecordItem_Btn() throws Exception
     {
         try
@@ -79,6 +111,44 @@ public class ConfigurationManage_Page extends BaseClass{
         try
         {
             element = ActionKeywords.findElementByXpath("//*[@id='cfdAttributeGridResultItemTable']/tbody/tr[last()]/td[last()]/a");
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return element;
+    }
+
+    public static WebElement lastRecordItem_Field() throws Exception
+    {
+        try
+        {
+            element = ActionKeywords.findElementByXpath("//*[@id='cfdAttributeGridResultItemTable']/tbody/tr[last()]/td[last()]/input");
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return element;
+    }
+    public static WebElement lastBusDetail_Field() throws Exception
+    {
+        try
+        {
+            element = ActionKeywords.findElementByXpath("//*[@id='cfdAttributeGridResultBusTable']/tbody/tr[last()]/td[last()]/input");
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return element;
+    }
+
+    public static WebElement lastGroupDetail_Field() throws Exception
+    {
+        try
+        {
+            element = ActionKeywords.findElementByXpath("//*[@id='cfdAttributeGridResultGroupTable']/tbody/tr[last()]/td[last()]/input");
         }
         catch (Exception e)
         {

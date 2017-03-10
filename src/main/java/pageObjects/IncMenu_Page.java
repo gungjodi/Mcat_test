@@ -95,4 +95,11 @@ public class IncMenu_Page extends BaseClass{
         }
         return element;
     }
+
+    public static WebElement link_INCCode() throws Exception{
+        try{element = ActionKeywords.findElementByXpath(".//*[@id='ResultRow0']/td[2]/a");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
 }

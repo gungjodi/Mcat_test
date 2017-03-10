@@ -1,3 +1,4 @@
+@load_raw_data
 Feature: Load Data Action
 
 Background: flow untill user on Home Page
@@ -12,8 +13,6 @@ Scenario: Load Raw Data
 	And Successful Upload message should display
     When User check loaded raw data
     Then loaded raw data should be displayed
-    When User click LogOut button
-    Then User should be logged out
 
 
 			

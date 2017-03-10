@@ -99,6 +99,14 @@ public class HomePage_Module {
 		{throw(e);}
 	}
 
+	public static void access_AssignedItemMenu() throws Exception{
+		try{
+			ActionKeywords.clickAction(Main_Page.menu_AssignedItem());
+		}
+		catch(Exception e)
+		{throw(e);}
+	}
+
 	public static void access_INCMenu() throws Exception{
 		try{
 			ActionKeywords.clickAction(Main_Page.menu_INC());
@@ -127,5 +135,28 @@ public class HomePage_Module {
 			throw (e);
 		}
 	}
+
+	public static void waitLoadingDiv() throws Exception
+	{
+		try {
+			ActionKeywords.waitForElementDisappear(By.xpath("//*[@id='loading']/img"));
+		}
+		catch (Exception e)
+		{
+			throw (e);
+		}
+	}
+
+    public static void access_ReviewItemMenu() throws Exception{
+		ActionKeywords.moveToElementExecutor(Main_Page.menu_ReviewItem());
+    }
+
+    public static void access_AdvanceSearchMenu() throws Exception {
+		try{
+			ActionKeywords.clickAction(Main_Page.menu_AdvanceSearch());
+		}
+		catch(Exception e)
+		{throw(e);}
+    }
 }
 

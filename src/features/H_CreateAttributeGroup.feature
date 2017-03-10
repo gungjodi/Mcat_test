@@ -1,3 +1,4 @@
+@create_attribute_group
 Feature: Create new Attribute Group
 
   Background: flow untill user on Home Page
@@ -9,7 +10,8 @@ Feature: Create new Attribute Group
   Scenario: Create new Attribute Group
     When User access create Attribute Group Menu
     Then User fill Attribute Group detail
-    And click add Attribute Group button
+    Then click add Attribute Group button
+    And Attribute Group item should be created
     When User access Search Attribute Group menu
     Then search Attribute Group criteria
     And Attribute Group item should be displayed

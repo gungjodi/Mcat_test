@@ -86,4 +86,16 @@ public class NscMenu_Page extends BaseClass{
         }
         return element;
     }
+
+    public static WebElement link_NSCCode() throws Exception{
+        try{element = ActionKeywords.findElementByXpath(".//*[@id='ResultRow0']/td[2]/a");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
+    public static WebElement btn_SaveNSCDetail() throws Exception{
+        try{element = ActionKeywords.findElementByXpath("//input[@value='Save']");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
 }

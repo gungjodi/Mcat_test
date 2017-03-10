@@ -61,4 +61,23 @@ public class Attribute_Page extends BaseClass{
         }
         return element;
     }
+
+    public static WebElement link_AttributeCode() throws Exception{
+        try{element = ActionKeywords.findElementByXpath(".//*[@id='ResultRow0']/td[2]/a");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
+    public static WebElement picklist_AttributeGroupName() throws Exception{
+        try{element = ActionKeywords.findElementByXpath("//a[contains(@href, 'AttrGroupName')]/img[contains(@src,'search.gif')]");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
+    public static WebElement link_AttributeGroup() throws Exception{
+        try{element = ActionKeywords.findElementByXpath(".//*[@id='ResultRow0']/td/a");}
+        catch(Exception e){throw(e);}
+        return element;
+    }
+
 }

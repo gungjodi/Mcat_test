@@ -1,3 +1,4 @@
+@name_the_item_checklist
 Feature: Name the Item from checklist
 
   Background: flow untill user on Home Page
@@ -11,4 +12,5 @@ Feature: Name the Item from checklist
     Then raw data should be displayed
     When User tick one or more checkboxes
     Then user search INC code
-    And User Click name button
+    Then User Click name button
+    And Items should be named

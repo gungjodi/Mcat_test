@@ -1,5 +1,7 @@
 package modules;
 
+import gherkin.lexer.Th;
+import pageObjects.CommonElement;
 import pageObjects.NscMenu_Page;
 import pageObjects.RawDataItem_Page;
 import pageObjects.SearchCriteria;
@@ -16,6 +18,7 @@ public class RawDataItem_Module {
     static List<String> stockCodes = new ArrayList<String>();
     static String parentincwindow;
     static String incWindow;
+
 	public static void access_SearchRawDataItemMenu() throws Exception{
 		try{
 		    ActionKeywords.clickAction(RawDataItem_Page.menu_SearchRawDataItem());
@@ -36,7 +39,8 @@ public class RawDataItem_Module {
 			String searchCriteria=ExcelUtils.getCellData(7, 1);
 			RawDataItem_Page.txt_Criteria().sendKeys(searchCriteria);
 			ActionKeywords.clickAction(SearchCriteria.btn_Search());
-			ActionKeywords.findElementByXpath("//a[contains(.,'"+searchCriteria+"')]").isDisplayed();
+			HomePage_Module.waitLoading();
+			ActionKeywords.assertTrueContains(searchCriteria,CommonElement.resultTableCell(1,2,"/a").getText());
 		}
 		catch(Exception e)
 		{
@@ -47,11 +51,21 @@ public class RawDataItem_Module {
 	public static void searchRawDataIsDisplayed() throws Exception
 	{
 		RawDataItem_Page.menu_SearchRawDataItem().isDisplayed();
+
+        ActionKeywords.clickAction(SearchCriteria.btn_AddCriteria());
+        SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(6, 11));
+        ActionKeywords.pageWait();
+        SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(7, 12));
+        Thread.sleep(1000);
+        String searchCriteria=ExcelUtils.getCellData(7, 7);
+        SearchCriteria.dropdown_SearchMethod("value1_0",searchCriteria);
+        ActionKeywords.clickAction(SearchCriteria.btn_Search());
+        Thread.sleep(1000);
 	}
 
 	public static void newRawItem() throws Exception
     {
-        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
+        HomePage_Module.waitLoading();
         List<WebElement> rows = RawDataItem_Page.RawDataRows();
         for (int i = 0 ; i<rows.size();i++) {
             String resultRow = "ResultRow"+i;
@@ -59,6 +73,7 @@ public class RawDataItem_Module {
             if(column.get(5).getText().equals("NEW"))
             {
                 WebElement stockCodeLink = RawDataItem_Page.StockCodeLink("//*[@id='"+resultRow+"']/td[2]/a");
+                ExcelUtils.setCellData(stockCodeLink.getText(),43,1);
                 ActionKeywords.moveToElementExecutor(stockCodeLink);
                 break;
             }
@@ -83,33 +98,34 @@ public class RawDataItem_Module {
         WebElement incLink = ActionKeywords.findElementByPartialLinkText(ExcelUtils.getCellData(7, 6));
         ActionKeywords.moveToElementExecutor(incLink);
         ActionKeywords.navigateOnWindow(parentwindow);
-        ActionKeywords.clickAction(ActionKeywords.findElementByXpath("//*[@id='NameButton']"));
+        ActionKeywords.clickAction(RawDataItem_Page.nameLink());
     }
 
     public static void tickOneOrMoreRow() throws Exception
     {
         for (int i = 0 ; i<2;i++) {
+            String resultRowNum = "ResultRow"+i;
+            String data = ActionKeywords.findElementByXpath("//*[@id='"+resultRowNum+"']/td[2]/a").getText();
+            ExcelUtils.setCellData(data,43+i,2);
+
             String resultCheckNum = "Resultcheck"+i;
             WebElement resultCheck = ActionKeywords.findElementByXpath("//*[@id='"+resultCheckNum+"']");
             ActionKeywords.clickAction(resultCheck);
         }
-
     }
 
     public static void pickIncCode() throws Exception
     {
         parentincwindow = ActionKeywords.getParentWindow();
-        ActionKeywords.moveToElementExecutor(ActionKeywords.findElementByXpath("//*[@id=\"buttons\"]/table/tbody/tr/td[2]/input"));
+        ActionKeywords.moveToElementExecutor(RawDataItem_Page.btn_Name());
         ActionKeywords.checkAlert();
         for (String window : ActionKeywords.getAllWindows())
         {
             ActionKeywords.navigateOnWindow(window);
         }
 
-        WebElement searchInc = ActionKeywords.findElementByXpath("/html/body/div[4]/div/div[2]/form/div/table/tbody/tr[1]/td[2]/a");
-
         incWindow = ActionKeywords.getParentWindow();
-        ActionKeywords.clickAction(searchInc);
+        ActionKeywords.clickAction(RawDataItem_Page.searchIncBtn());
 
     }
 
@@ -123,7 +139,7 @@ public class RawDataItem_Module {
         WebElement incLink = ActionKeywords.findElementByPartialLinkText(ExcelUtils.getCellData(7, 6));
         ActionKeywords.moveToElementExecutor(incLink);
         ActionKeywords.navigateOnWindow(incWindow);
-        ActionKeywords.clickAction(ActionKeywords.findElementByXpath("//*[@id='NameButton']"));
+        ActionKeywords.clickAction(RawDataItem_Page.nameLink());
         ActionKeywords.closeWindow();
         ActionKeywords.navigateOnWindow(parentincwindow);
     }
@@ -144,6 +160,43 @@ public class RawDataItem_Module {
     public static void searchCriteriaNamed() throws Exception {
         Thread.sleep(1000);
         ActionKeywords.clickAction(SearchCriteria.btn_Search());
+    }
+
+    public static void checkItemNamed() throws Exception {
+        HomePage_Module.waitLoading();
+        ActionKeywords.pageWait();
+        ExcelUtils.setExcelFile(Constant.Path_TestData+Constant.File_TestData,"Sheet1");
+        SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(2, 11));
+        Thread.sleep(1000);
+        SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(1, 12));
+        Thread.sleep(1000);
+        String lastStockCodeNamed = ExcelUtils.getCellData(43,1);
+        RawDataItem_Page.txt_Criteria().sendKeys(lastStockCodeNamed);
+        ActionKeywords.clickAction(SearchCriteria.btn_Search());
+        HomePage_Module.waitLoading();
+        ActionKeywords.assertTrueContains(String.valueOf(lastStockCodeNamed),RawDataItem_Page.firstRowTable().getText());
+        ActionKeywords.assertTrueContains("NAMED",RawDataItem_Page.firstItemStatus().getText());
+    }
+
+    public static void checkItemFromChecklistNamed() throws Exception {
+        for (int i = 0 ; i<2;i++) {
+            HomePage_Module.waitLoading();
+            ExcelUtils.setExcelFile(Constant.Path_TestData+Constant.File_TestData,"Sheet1");
+            SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(2, 11));
+            Thread.sleep(1000);
+            SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(1, 12));
+            Thread.sleep(1000);
+            String StockCodeNamed = ExcelUtils.getCellData(43+i,2);
+            RawDataItem_Page.txt_Criteria().clear();
+            RawDataItem_Page.txt_Criteria().sendKeys(StockCodeNamed);
+            ActionKeywords.clickAction(SearchCriteria.btn_Search());
+            HomePage_Module.waitLoading();
+
+            ActionKeywords.assertTrueContains((StockCodeNamed),RawDataItem_Page.firstRowTable().getText());
+            ActionKeywords.assertTrueContains("NAMED",RawDataItem_Page.firstItemStatus().getText());
+            System.out.println("INC CODE : "+RawDataItem_Page.firstRowTable().getText()+" & STATUS : "+RawDataItem_Page.firstItemStatus().getText());
+        }
+
     }
 
     public static void access_FirstRow() throws Exception {
@@ -183,8 +236,8 @@ public class RawDataItem_Module {
         RawDataItem_Page.txt_Criteria1().sendKeys(searchCriteria);
         ActionKeywords.clickAction(SearchCriteria.btn_Search());
         HomePage_Module.waitLoading();
-        String xpathResult = "//a[contains(text(),"+stockCode+")]/parent::td/parent::tr/td[@id='ResultRow0Col6' and contains(text(),'"+searchCriteria+"')]";
-        ActionKeywords.findElementByXpath(xpathResult).isDisplayed();
+        String xpathResult = "//a[contains(text(),"+stockCode+")]/parent::td/parent::tr/td[@id='ResultRow0Col6']";
+        ActionKeywords.assertTrueContains(searchCriteria,ActionKeywords.findElementByXpath(xpathResult).getText());
     }
 
     public static void tickItems() throws Exception {
@@ -194,7 +247,7 @@ public class RawDataItem_Module {
             String stockCodePath = "//*[@id='"+resultStockNum+"']/td[2]/a";
             WebElement stock = ActionKeywords.findElementByXpath(stockCodePath);
             stockCodes.add(stock.getText());
-            ExcelUtils.setCellData(RawDataItem_Page.firstRowTable().getText(),34+i,14);
+            ExcelUtils.setCellData(stock.getText(),34+i,14);
             WebElement resultCheck = ActionKeywords.findElementByXpath("//*[@id='"+resultCheckNum+"']");
             ActionKeywords.clickAction(resultCheck);
         }
@@ -218,9 +271,7 @@ public class RawDataItem_Module {
             ActionKeywords.navigateOnWindow(window);
         }
 
-        String username = ExcelUtils.getCellData(34,12);
-        WebElement linkUsername = ActionKeywords.findElementByPartialLinkText(username);
-        ActionKeywords.moveToElementExecutor(linkUsername);
+        ActionKeywords.moveToElementExecutor(RawDataItem_Page.linkUsername(ExcelUtils.getCellData(34,12)));
         ActionKeywords.navigateOnWindow(secondWindow);
         ActionKeywords.moveToElementExecutor(RawDataItem_Page.btn_doAssignitem());
         ActionKeywords.closeWindow();
@@ -242,9 +293,10 @@ public class RawDataItem_Module {
         HomePage_Module.waitLoading();
         for (int i = 0; i < stockCodes.size(); i++)
         {
-            WebElement item = ActionKeywords.findElementByXpath("//a[contains(text(),'"+stockCodes.get(i)+"')]/parent::td/parent::tr/td[@id='ResultRow"+i+"Col6' and contains(text(),'"+searchCriteria+"')]");
-            ActionKeywords.moveToElementExecutor(item);
-            item.isDisplayed();
+            String data = ExcelUtils.getCellData(34+i,14);
+            ActionKeywords.assertTrueContains(data,CommonElement.resultTableCell(i+1,2,"/a").getText());
+            ActionKeywords.assertTrueContains(searchCriteria,CommonElement.resultTableCell(i+1,7).getText());
         }
     }
+
 }

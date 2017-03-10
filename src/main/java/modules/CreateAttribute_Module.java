@@ -29,16 +29,20 @@ public class CreateAttribute_Module {
 
     public static void fill_AttributeDetail() throws Exception
     {
-        Attribute_Page.AttributeCode_Field().sendKeys("01_MMANUFACTURER");
-        Attribute_Page.AttributeName_Field().sendKeys("Manufacturer");
-        ActionKeywords.selectDropdownElementByVisibleText("AttrTypeId","Business Unit");
+        ExcelUtils.setExcelFile(Constant.Path_TestData+Constant.File_TestData,"Sheet1");
+        searchCriteria = ExcelUtils.getCellData(43,5);
+        String Name = ExcelUtils.getCellData(43,6);
+        String AttrType = ExcelUtils.getCellData(43,7);
+        Attribute_Page.AttributeCode_Field().sendKeys(searchCriteria);
+        Attribute_Page.AttributeName_Field().sendKeys(Name);
+        ActionKeywords.selectDropdownElementByVisibleText("AttrTypeId",AttrType);
         parentWindow = ActionKeywords.getParentWindow();
         ActionKeywords.moveToElementExecutor(Attribute_Page.searchGroupBtn());
         for (String window : ActionKeywords.getAllWindows())
         {
             ActionKeywords.navigateOnWindow(window);
         }
-        ExcelUtils.setExcelFile(Constant.Path_TestData+Constant.File_TestData,"Sheet1");
+
         ActionKeywords.clickAction(SearchCriteria.btn_AddCriteria());
         SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(12, 11));
         ActionKeywords.pageWait();
@@ -58,20 +62,23 @@ public class CreateAttribute_Module {
 
     public static void search_AttributeCriteria() throws Exception
     {
-        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
+        HomePage_Module.waitLoading();
         ExcelUtils.setExcelFile(Constant.Path_TestData+Constant.File_TestData,"Sheet1");
         WebElement addCriteria = SearchCriteria.btn_AddCriteria();
         ActionKeywords.clickAction(addCriteria);
         SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(10, 11));
         ActionKeywords.pageWait();
         SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(7, 12));
-        searchCriteria="01_MMANUFACTURER";
         RawDataItem_Page.txt_Criteria().sendKeys(searchCriteria);
         ActionKeywords.clickAction(SearchCriteria.btn_Search());
     }
     public static void search_Result() throws Exception
     {
-        ActionKeywords.waitForElementDisappear(By.xpath("//*[@id=\"ResultTable\"]/tbody/tr/td/img"));
-        ActionKeywords.findElementByXpath("//a[contains(.,'"+searchCriteria+"')]").isDisplayed();
+        HomePage_Module.waitLoading();
+        ActionKeywords.assertTrueContains(searchCriteria,CommonElement.resultTableCell(1,1,"/a").getText());
+    }
+
+    public static void success_CreateAttribute() throws Exception {
+        ActionKeywords.assertTrueContains("Attribute has been successfully updated",CommonElement.validation_Summary().getText());
     }
 }

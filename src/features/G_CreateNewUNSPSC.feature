@@ -1,3 +1,4 @@
+@create_new_unspsc
 Feature: Create new UNSPSC
 
   Background: flow untill user on Home Page
@@ -9,7 +10,8 @@ Feature: Create new UNSPSC
   Scenario: Create new UNSPSC
     When User access create UNSPSC Menu
     Then User fill UNSPSC detail
-    And click add UNSPSC button
+    Then click add UNSPSC button
+    And UNSPSC should be created
     When User access Search UNSPSC menu
     Then search UNSPSC criteria
     And UNSPSC item should be displayed

@@ -53,7 +53,10 @@ public class CreateUNSPSC_module {
 
     public static void search_Result() throws Exception
     {
-        ActionKeywords.findElementByPartialLinkText(searchCriteria).isDisplayed();
+        ActionKeywords.assertTrueContains(searchCriteria,CommonElement.resultTableCell(1,1,"/a").getText());
     }
 
+    public static void success_CreateUnspsc() throws Exception {
+        ActionKeywords.assertTrueContains("UNSPSC has been successfully added",CommonElement.validation_Summary().getText());
+    }
 }

@@ -54,27 +54,35 @@ public class CreateNSC_module {
     public static void click_AddNsc() throws Exception
     {
         ActionKeywords.moveToElementExecutor(CommonElement.addBtn());
+        ActionKeywords.pageWait();
     }
 
     public static void search_NscMenu() throws Exception
     {
         ActionKeywords.moveToElementExecutor(NscMenu_Page.SearchNSC_Menu());
+        ActionKeywords.pageWait();
     }
 
     public static void search_NscCode() throws Exception
     {
+        HomePage_Module.waitLoading();
         ActionKeywords.clickAction(SearchCriteria.btn_AddCriteria());
         SearchCriteria.dropdown_SearchMethod("criteria0",ExcelUtils.getCellData(1, 11));
-        ActionKeywords.pageWait();
+        Thread.sleep(1000);
         SearchCriteria.dropdown_Operator("operator0",ExcelUtils.getCellData(7, 12));
         searchNSCCriteria=ExcelUtils.getCellData(20, 11);
         RawDataItem_Page.txt_Criteria().sendKeys(searchNSCCriteria);
+        Thread.sleep(1000);
         ActionKeywords.clickAction(SearchCriteria.btn_Search());
-        ActionKeywords.pageWait();
+        HomePage_Module.waitLoading();
     }
 
     public static void NSC_Exists() throws Exception
     {
-        ActionKeywords.findElementByPartialLinkText(searchNSCCriteria).isDisplayed();
+        ActionKeywords.assertTrueContains(searchNSCCriteria,CommonElement.resultTableCell(1,2,"/a").getText());
+    }
+
+    public static void success_CreateNsc() throws Exception{
+        ActionKeywords.assertTrueContains("NSC has been successfully added",CommonElement.validation_Summary().getText());
     }
 }

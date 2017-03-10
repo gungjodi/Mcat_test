@@ -3,6 +3,7 @@ package pageObjects;
 import utility.ActionKeywords;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utility.ExcelUtils;
 
 import java.util.List;
 
@@ -25,6 +26,12 @@ public class RawDataItem_Page extends BaseClass {
 
 	public static WebElement txt_Criteria1() throws Exception{
 		try{element = ActionKeywords.findElementByXpath(".//*[@id='value1_1']");}
+		catch(Exception e){throw(e);}
+		return element;
+	}
+
+	public static WebElement btn_Name() throws Exception{
+		try{element = ActionKeywords.findElementByXpath("//input[@type='button' and @value='Name']");}
 		catch(Exception e){throw(e);}
 		return element;
 	}
@@ -90,6 +97,18 @@ public class RawDataItem_Page extends BaseClass {
 		return element;
 	}
 
+	public static WebElement linkUsername(String username) throws Exception
+	{
+		try {
+			element = ActionKeywords.findElementByPartialLinkText(username);
+		}
+		catch (Exception e)
+		{
+			throw (e);
+		}
+		return element;
+	}
+
 	public static WebElement nameLink() throws Exception
 	{
 		try
@@ -112,4 +131,26 @@ public class RawDataItem_Page extends BaseClass {
 		}
 		return element;
 	}
+
+	public static WebElement firstItemStatus() throws Exception
+	{
+		try {
+			element = ActionKeywords.findElementByXpath("//*[@id='ResultRow0Col5']");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return element;
+	}
+
+	public static WebElement searchIncBtn() throws Exception
+	{
+		try {
+			element = ActionKeywords.findElementByXpath("//a[contains(@href,'/Nsc/IncLookup')]");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return element;
+	}
+
+
 }

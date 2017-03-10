@@ -1,5 +1,6 @@
 package modules;
 
+import pageObjects.CommonElement;
 import utility.ActionKeywords;
 import utility.Constant;
 import pageObjects.LoadDictionaryData_Page;
@@ -20,9 +21,16 @@ public class LoadDictionaryData_Module {
 			Thread.sleep(5000);
 			LoadDictionaryData_Page.btn_LoadExcelFile().click();
 			Thread.sleep(15000);
-			ActionKeywords.waitForElement(By.id("validationSummary"));
+			HomePage_Module.waitLoading();
 		}
 		catch(Exception e)
 		{throw(e);}
 	}
+
+    public static void result() throws Exception {
+	    HomePage_Module.waitLoadingDiv();
+		String expectedResult = ".xlsx have been uploaded successfully";
+		String actualResult = CommonElement.validation_Summary().getText();
+		ActionKeywords.assertTrueContains(expectedResult,actualResult);
+    }
 }

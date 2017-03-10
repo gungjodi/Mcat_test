@@ -37,4 +37,14 @@ public class SearchCriteria extends BaseClass {
 		catch (Exception e){throw(e);}
 		return element;
 	}
+	public static WebElement btn_AddAttribute() throws Exception{
+		try{element = ActionKeywords.findElementById("AddAttribute");}
+		catch (Exception e){throw(e);}
+		return element;
+	}
+	public static WebElement btn_pickAttribute() throws Exception{
+		try{element = ActionKeywords.findElementByXpath("//a[contains(@href,'/Attribute/Search')]");}
+		catch (Exception e){throw(e);}
+		return element;
+	}
 }
